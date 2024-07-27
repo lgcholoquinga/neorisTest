@@ -1,6 +1,6 @@
 <div class="table-foot">
     <span>{{totalProducts()}} Results</span>
-    <select>
+    <select [(ngModel)]="currentPage" (change)="onChangePagination()">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>

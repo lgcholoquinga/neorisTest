@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody class="product-table__body">
-        @for (product of products(); track product.id) {
+        @for (product of selectedProducts(); track product.id) {
         <tr>
             <td>
                 <img class="product-table__logo" [src]="product.logo" [alt]="product.name" width="40" height="40">
@@ -22,4 +22,4 @@
         }
     </tbody>
 </table>
-<app-table-foot [totalProducts]="products().length" />
+<app-table-foot [totalProducts]="products().length" (onShowItems)="onFilterItems($event)" />
