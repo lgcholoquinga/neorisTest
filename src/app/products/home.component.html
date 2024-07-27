@@ -1,1 +1,12 @@
-<p>home works!</p>
+<section class="container">
+  <h2>List Products</h2>
+  <hr />
+
+  <div>
+    @if (products$ | async; as products) {
+    @for (product of products; track product.id) {
+    <p>{{ product.name }}</p>
+    }
+    }
+  </div>
+</section>
