@@ -2,11 +2,9 @@
   <h2>List Products</h2>
   <hr />
 
-  <div>
+  <div class="table-container">
     @if (products$ | async; as products) {
-    @for (product of products; track product.id) {
-    <p>{{ product.name }}</p>
-    }
+    <app-table-product [products]="products" />
     }
   </div>
 </section>

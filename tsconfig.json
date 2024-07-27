@@ -9,7 +9,8 @@
     "paths": {
       "@shared/*": ["app/shared/*"],
       "@products/*": ["app/products/*"],
-      "@core/*": ["app/core/*"]
+      "@core/*": ["app/core/*"],
+      "@scss/*": ["scss/*"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

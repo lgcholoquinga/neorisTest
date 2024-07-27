@@ -1,0 +1,28 @@
+@use '../../../../scss/base/variables' as v;
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__header {
+        background-color: v.$secondary;
+        height: 48px;
+
+        tr {
+            th {
+                border: none;
+            }
+        }
+    }
+
+    &__body {
+        tr > td {
+            height: 48px;
+            border-bottom: 1px solid v.$gray;
+        }
+    }
+
+    &__logo {
+        border-radius: 50%;
+    }
+}

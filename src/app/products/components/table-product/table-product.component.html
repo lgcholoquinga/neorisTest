@@ -1,0 +1,37 @@
+<table class="product-table">
+    <thead class="product-table__header">
+        <tr>
+            <th class="text-center">Logo</th>
+            <th class="text-left">Nombre del producto</th>
+            <th class="text-left">Descripcion</th>
+            <th class="text-left">Fecha de liberacion</th>
+            <th class="text-left">Fecha de reestructuracion</th>
+        </tr>
+    </thead>
+    <tbody class="product-table__body">
+        @for (product of products(); track product.id) {
+        <tr>
+            <td>
+                <img class="product-table__logo" [src]="product.logo" [alt]="product.name" width="30" height="30">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{product.description}}</td>
+            <td>{{ product.date_release | date: 'dd/MM/YYYY' }}</td>
+            <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
+        </tr>
+        }
+    </tbody>
+    <!-- <tfoot class="product-table__foot">
+        <th>{{ products().length }} Results</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-right">
+            <select>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </th>
+    </tfoot> -->
+</table>
