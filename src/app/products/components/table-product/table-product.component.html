@@ -12,7 +12,7 @@
         @for (product of products(); track product.id) {
         <tr>
             <td>
-                <img class="product-table__logo" [src]="product.logo" [alt]="product.name" width="30" height="30">
+                <img class="product-table__logo" [src]="product.logo" [alt]="product.name" width="40" height="40">
             </td>
             <td>{{ product.name }}</td>
             <td>{{product.description}}</td>
@@ -21,17 +21,5 @@
         </tr>
         }
     </tbody>
-    <!-- <tfoot class="product-table__foot">
-        <th>{{ products().length }} Results</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th class="text-right">
-            <select>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-            </select>
-        </th>
-    </tfoot> -->
 </table>
+<app-table-foot [totalProducts]="products().length" />
