@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { PoductFormComponent } from '../poduct-form/poduct-form.component';
 import { Product } from '@core/models/product.interface';
+import { ProductsService } from '../../../core/services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -13,15 +15,17 @@ import { Product } from '@core/models/product.interface';
 export default class EditProductComponent {
   public title = 'Formulario de Edicion';
 
+  private productService = inject(ProductsService);
+  private navigate = inject(Router);
+
   /**
-   * Method that permit register a product
-   * @returns Object con the new product registered
+   * Method that permit update a product
+   * @returns Object con the new product updated
    */
-  onSaveProduct(product: Product) {
-    console.log(product);
-    // this.productService.createProduct(product).subscribe(() => {
-    //   alert('Product registered succesfully.');
-    //   this.navigate.navigateByUrl('/products');
-    // });
+  onUpdateProduct(product: Product) {
+    this.productService.updateProduct(product).subscribe(() => {
+      alert('Product updated succesfully.');
+      this.navigate.navigateByUrl('/products');
+    });
   }
 }

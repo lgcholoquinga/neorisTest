@@ -21,7 +21,7 @@
             <td>{{ product.date_release | date: 'dd/MM/YYYY' }}</td>
             <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
             <td>
-                <app-dropdown [idProduct]="product.id" />
+                <app-dropdown [product]="product" />
             </td>
         </tr>
         }

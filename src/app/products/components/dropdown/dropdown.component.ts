@@ -7,6 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '@core/models/product.interface';
 import { ProductsService } from '@core/services/products.service';
 
 @Component({
@@ -20,16 +21,19 @@ export class DropdownComponent {
   private router = inject(Router);
   private productsService = inject(ProductsService);
 
+  @Input({ required: true }) product!: Product;
+
   @ViewChild('modalConfirm')
   modalConfirmDeleteProduct!: ElementRef<HTMLDivElement>;
-
-  @Input({ required: true }) idProduct = '';
 
   /**
    * Method that redirect to edit product page
    */
   onEditProduct() {
-    this.router.navigateByUrl(`/products/edit/${this.idProduct}`);
+    const product = btoa(JSON.stringify(this.product));
+    this.router.navigate([`/products/edit/${this.product?.id}`], {
+      queryParams: { product },
+    });
   }
 
   /**
@@ -44,7 +48,7 @@ export class DropdownComponent {
    */
   onRemoveProduct(): void {
     this.onCloseModal();
-    this.productsService.deleteProduct(this.idProduct).subscribe((data) => {
+    this.productsService.deleteProduct(this.product?.id).subscribe((data) => {
       if (data.deletedProduct) {
         alert('Product deleted.');
         window.location.reload();

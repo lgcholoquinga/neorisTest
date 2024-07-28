@@ -57,4 +57,13 @@ export class ProductsService {
         })
       );
   }
+
+  /**
+   * Method that permite update a product
+   * @param product Object with data product
+   * @returns Object with new data product
+   */
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(this.productsUrl, { product });
+  }
 }

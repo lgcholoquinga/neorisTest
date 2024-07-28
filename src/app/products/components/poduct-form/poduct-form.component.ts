@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -20,13 +28,14 @@ import { Product } from '@core/models/product.interface';
   templateUrl: './poduct-form.component.html',
   styleUrl: './poduct-form.component.scss',
 })
-export class PoductFormComponent {
+export class PoductFormComponent implements OnInit {
   @Input() isEdition = false;
   @Input() titleForm = 'Formulario de Registro';
   @Output() onProductChange = new EventEmitter<Product>();
 
   private fb = inject(FormBuilder);
   private validatorsService = inject(ValidatorsService);
+  private route = inject(ActivatedRoute);
 
   public productForm: FormGroup = this.fb.group({
     id: [
@@ -50,6 +59,51 @@ export class PoductFormComponent {
     dateRelease: ['', [Validators.required, fechaMayorIgualHoyValidator]],
     dateRevision: ['', [Validators.required]],
   });
+
+  ngOnInit(): void {
+    if (this.isEdition) {
+      this.loadDataEditProduct();
+    }
+  }
+
+  /**
+   * Method that load data product for edit form
+   */
+  public loadDataEditProduct() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const productBase64 = this.route.snapshot.queryParams['product'];
+    const productDecode = atob(productBase64);
+    const editProduct: Product = JSON.parse(productDecode);
+
+    this.productForm.controls['id'].setValue(id);
+    this.productForm.controls['id'].clearAsyncValidators();
+
+    this.productForm.controls['name'].setValue(editProduct.name);
+    this.productForm.controls['description'].setValue(editProduct.description);
+    this.productForm.controls['logo'].setValue(editProduct.logo);
+    this.productForm.controls['dateRelease'].setValue(
+      this.convertDateToString(editProduct.date_release)
+    );
+    this.productForm.controls['dateRevision'].setValue(
+      this.convertDateToString(editProduct.date_revision)
+    );
+  }
+
+  /**
+   * Method that reorder date string to correct format
+   * @param dateStr Date in format string
+   * @returns Date with correct format
+   */
+  public convertDateToString(dateStr: string) {
+    const dateString = new Date(dateStr).toLocaleDateString('en-ES', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    const splitDate = dateString.split('/');
+    return `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`;
+  }
 
   /**
    * Method that permit register a product

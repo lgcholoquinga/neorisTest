@@ -5,7 +5,8 @@
     <div class="box-product">
         <div class="box-product__item">
             <label for="id">ID</label>
-            <input type="text" name="id" id="id" placeholder="ID" autocomplete="off" formControlName="id" />
+            <input type="text" name="id" id="id" placeholder="ID" autocomplete="off" formControlName="id"
+                [readOnly]="isEdition" />
             <app-show-form-error *ngIf="isValidField('id')" [message]="getFieldError('id')" />
         </div>
         <div class="box-product__item">
