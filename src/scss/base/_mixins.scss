@@ -36,6 +36,8 @@
     transition-property: background-color;
     transition-duration: .3s;
     text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
 
     @include tablet {
         width: auto;
@@ -48,13 +50,14 @@
 @mixin input() {
     padding: 1rem;
     outline: none;
+    height: 48px;
 
     &:focus {
         border: 2px solid v.$gray;
     }
 }
 
-@mixin grid($columnas, $espaciado ) {
+@mixin grid($columnas, $espaciado) {
     display: grid;
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);

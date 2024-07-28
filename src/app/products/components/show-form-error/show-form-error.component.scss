@@ -1,0 +1,5 @@
+@use '../../../../scss/base/variables' as v;
+
+.text-error {
+    color: v.$error;
+}
