@@ -4,7 +4,6 @@
 
     <button class="button" type="button" routerLink="/products/create">Agregar</button>
 </div>
-
 <div class="table-container">
     <app-poducts-table [products]="selectedProducts" [totalProducts]="products.length"
         (onShowProductsChange)="onGetProductsByQuantity($event)" />

@@ -1,6 +1,10 @@
 @use '../../../../scss/base/variables' as v;
 @use '../../../../scss/base/mixins' as m;
 
+.dropdown {
+    position: relative;
+}
+
 .dropdown button {
     cursor: pointer;
 }
@@ -16,6 +20,9 @@
 .dropdown .content {
     display: none;
     position: absolute;
+    top: 20px;
+    left: -100px;
+    right: 0;
     background-color: v.$secondary;
     min-width: 100px;
     box-shadow: 2px 2px 5px hsl(0, 0%, 0%, 0.8);
