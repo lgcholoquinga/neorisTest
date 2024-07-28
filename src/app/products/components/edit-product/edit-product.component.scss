@@ -1,0 +1,9 @@
+@use '../../../../scss/base/variables' as v;
+
+.edit-product {
+    max-width: 800px;
+    margin: 10rem auto;
+    background-color: v.$white;
+    padding: 3rem;
+    margin-top: 2rem;
+}

@@ -26,6 +26,7 @@
     background-color: v.$secondary;
     min-width: 100px;
     box-shadow: 2px 2px 5px hsl(0, 0%, 0%, 0.8);
+    z-index: 10001;
 }
 
 .dropdown:hover .content {

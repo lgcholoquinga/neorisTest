@@ -1,1 +1,48 @@
-<p>poduct-form works!</p>
+<h1 class="create-product__title text-center">{{titleForm}}</h1>
+<hr>
+
+<form [formGroup]="productForm" (ngSubmit)="onSaveProduct()" autocomplete="off">
+    <div class="box-product">
+        <div class="box-product__item">
+            <label for="id">ID</label>
+            <input type="text" name="id" id="id" placeholder="ID" autocomplete="off" formControlName="id" />
+            <app-show-form-error *ngIf="isValidField('id')" [message]="getFieldError('id')" />
+        </div>
+        <div class="box-product__item">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" placeholder="Nombre" autocomplete="off" formControlName="name" />
+            <app-show-form-error *ngIf="isValidField('name')" [message]="getFieldError('name')" />
+        </div>
+    </div>
+    <div class="box-product">
+        <div class="box-product__item">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="Description" autocomplete="off"
+                formControlName="description" />
+            <app-show-form-error *ngIf="isValidField('description')" [message]="getFieldError('description')" />
+        </div>
+        <div class="box-product__item">
+            <label for="logo">Logo</label>
+            <input type="text" name="logo" id="logo" placeholder="Logo" autocomplete="off" formControlName="logo" />
+            <app-show-form-error *ngIf="isValidField('logo')" [message]="getFieldError('logo')" />
+        </div>
+    </div>
+    <div class="box-product">
+        <div class="box-product__item">
+            <label for="dateRelease">Fecha Liberacion</label>
+            <input type="date" name="dateRelease" id="dateRelease" placeholder="Fecha Liberacion" autocomplete="off"
+                formControlName="dateRelease" (change)="onChangeDateRelease()" />
+            <app-show-form-error *ngIf="isValidField('dateRelease')" [message]="getFieldError('dateRelease')" />
+        </div>
+        <div class="box-product__item">
+            <label for="dateRevision">Fecha de Revision</label>
+            <input type="date" name="dateRevision" id="dateRevision" placeholder="Fecha de revision" autocomplete="off"
+                formControlName="dateRevision" readonly />
+            <app-show-form-error *ngIf="isValidField('dateRevision')" [message]="getFieldError('dateRevision')" />
+        </div>
+    </div>
+    <div class="buttons__container">
+        <button class="button-reiniciar" type="button" (click)="onResetForm()">Reiniciar</button>
+        <button class="button-enviar" type="submit">Enviar</button>
+    </div>
+</form>

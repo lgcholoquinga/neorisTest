@@ -1,74 +1,9 @@
 @use '../../../../scss/base/variables' as v;
-@use '../../../../scss/base/mixins' as m;
 
 .create-product {
     max-width: 800px;
     margin: 10rem auto;
     background-color: v.$white;
     padding: 3rem;
-    margin-top: 6rem;
-}
-
-.box-product {
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    
-    @include m.tablet {
-        @include m.grid(2, 2rem);
-    }
-
-    &__item {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.8rem;
-
-        @include m.desktop {
-            margin-bottom: 0;
-        }
-
-        label {
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        input {
-            @include m.input();
-            margin-bottom: 2px;
-        }
-    }
-}
-
-.buttons__container {
-    margin-top: 4rem;
-    display: block;
-
-    @include m.tablet {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-    }
-}
-
-.button-reiniciar {
-    width: 100%;
-    @include m.boton(v.$gray-light, v.$terciary);
-    @include m.tablet {
-        width: auto;
-    }
-}
-
-.button-enviar {
-    width: 100%;
-    @include m.boton(v.$primary, v.$terciary);
-    @include m.tablet {
-        width: auto;
-    }
-}
-
-input.ng-invalid.ng-touched{
-    border: 2px solid v.$error;
-}
-
-input.ng-pending.ng-touched{
-    border: 2px solid v.$error;
 }
