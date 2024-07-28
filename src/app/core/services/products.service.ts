@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Product } from '@core/models/product.interface';
 
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +39,22 @@ export class ProductsService {
    */
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product);
+  }
+
+  /**
+   * Methid that permit delete a product by identifier (Id)
+   * @param idProduct Identifier unique that product
+   * @returns Message string
+   */
+  deleteProduct(idProduct: string): Observable<any> {
+    return this.http
+      .delete<any>(this.productsUrl, {
+        params: { id: idProduct },
+      })
+      .pipe(
+        catchError((error) => {
+          return of({ deletedProduct: error?.status === 200 });
+        })
+      );
   }
 }

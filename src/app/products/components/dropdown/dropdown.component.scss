@@ -1,0 +1,59 @@
+@use '../../../../scss/base/variables' as v;
+@use '../../../../scss/base/mixins' as m;
+
+.dropdown button {
+    cursor: pointer;
+}
+
+.dropdown a {
+    display: block;
+    color: v.$black;
+    text-decoration: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.dropdown .content {
+    display: none;
+    position: absolute;
+    background-color: v.$secondary;
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsl(0, 0%, 0%, 0.8);
+}
+
+.dropdown:hover .content {
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: v.$gray-light;
+}
+
+/*Modal*/
+.modal-title {
+    margin-bottom: 6rem;
+}
+
+.modal-button-container {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.modal-button-cancelar {
+    width: 100%;
+    @include m.boton(v.$gray-light, v.$terciary);
+    @include m.desktop {
+        width: auto;
+    }
+}
+
+.modal-button-confirmar {
+    width: 100%;
+    @include m.boton(v.$primary, v.$terciary);
+    @include m.desktop {
+        width: auto;
+    }
+}

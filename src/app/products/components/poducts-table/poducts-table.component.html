@@ -7,6 +7,7 @@
             <th class="text-left">Descripcion</th>
             <th class="text-left">Fecha de liberacion</th>
             <th class="text-left">Fecha de reestructuracion</th>
+            <th></th>
         </tr>
     </thead>
     <tbody class="product-table__body">
@@ -19,6 +20,9 @@
             <td>{{product.description}}</td>
             <td>{{ product.date_release | date: 'dd/MM/YYYY' }}</td>
             <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
+            <td>
+                <app-dropdown [idProduct]="product.id" />
+            </td>
         </tr>
         }
     </tbody>

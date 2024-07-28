@@ -15,6 +15,11 @@ export const PRODUCTS_ROUTES: Routes = [
         loadComponent: () =>
           import('./components/create-product/create-product.component'),
       },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./components/edit-product/edit-product.component'),
+      },
     ],
   },
 ];
