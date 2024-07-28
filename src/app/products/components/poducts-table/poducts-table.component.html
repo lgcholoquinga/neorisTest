@@ -1,7 +1,8 @@
+<!-- Products Table -->
 <table class="product-table">
     <thead class="product-table__header">
         <tr>
-            <th class="text-center">Logo</th>
+            <th class="product-table-logo text-center">Logo</th>
             <th class="text-left">Nombre del producto</th>
             <th class="text-left">Descripcion</th>
             <th class="text-left">Fecha de liberacion</th>
@@ -9,9 +10,9 @@
         </tr>
     </thead>
     <tbody class="product-table__body">
-        @for (product of selectedProducts(); track product.id) {
+        @for (product of products; track product.id) {
         <tr>
-            <td>
+            <td class="product-table-body-logo">
                 <img class="product-table__logo" [src]="product.logo" [alt]="product.name" width="40" height="40">
             </td>
             <td>{{ product.name }}</td>
@@ -22,4 +23,12 @@
         }
     </tbody>
 </table>
-<app-table-foot [totalProducts]="products().length" (onShowItems)="onFilterItems($event)" />
+<!-- Foot Table -->
+<div class="table-foot">
+    <span>{{products.length}} Results</span>
+    <select #txtSelectQuantity (change)="onShowProductsByQuantity(txtSelectQuantity.value)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+</div>

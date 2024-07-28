@@ -45,6 +45,15 @@
     }
 }
 
+@mixin input() {
+    padding: 1rem;
+    outline: none;
+
+    &:focus {
+        border: 2px solid v.$gray;
+    }
+}
+
 @mixin grid($columnas, $espaciado ) {
     display: grid;
     gap: $espaciado;

@@ -28,3 +28,18 @@
         object-fit: cover;
     }
 }
+
+.product-table-logo {
+    width: 100px;
+}
+
+.product-table-body-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.table-foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
