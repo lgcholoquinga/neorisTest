@@ -38,6 +38,8 @@ export class ValidatorsService {
           return `Este campo requiere ${errors['maxlength'].requiredLength} caracteres.`;
         case 'fechaMayorIgualHoy':
           return 'La fecha debe ser igual o mayor a la fecha actual';
+        case 'productIdExists':
+          return 'The product id already exists.';
       }
     }
 

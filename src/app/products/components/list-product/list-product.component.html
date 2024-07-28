@@ -6,5 +6,6 @@
 </div>
 
 <div class="table-container">
-    <app-poducts-table [products]="selectedProducts" (onShowProductsChange)="onGetProductsByQuantity($event)" />
+    <app-poducts-table [products]="selectedProducts" [totalProducts]="products.length"
+        (onShowProductsChange)="onGetProductsByQuantity($event)" />
 </div>

@@ -3,14 +3,6 @@
     <hr>
 
     <form [formGroup]="productForm" (ngSubmit)="onSaveProduct()" autocomplete="off">
-        <pre>Pristine: {{productForm.pristine | json}}</pre>
-        <pre>Touched: {{productForm.touched | json}}</pre>
-        <pre>{{productForm.value | json}}</pre>
-
-        <pre>ID:</pre>
-        <pre>{{productForm.controls['dateRelease'].value| json}}</pre>
-        <pre>{{productForm.controls['dateRelease'].errors| json}}</pre>
-
         <div class="box-product">
             <div class="box-product__item">
                 <label for="id">ID</label>
@@ -41,13 +33,13 @@
             <div class="box-product__item">
                 <label for="dateRelease">Fecha Liberacion</label>
                 <input type="date" name="dateRelease" id="dateRelease" placeholder="Fecha Liberacion" autocomplete="off"
-                    formControlName="dateRelease" />
+                    formControlName="dateRelease" (change)="onChangeDateRelease()" />
                 <app-show-form-error *ngIf="isValidField('dateRelease')" [message]="getFieldError('dateRelease')" />
             </div>
             <div class="box-product__item">
                 <label for="dateRevision">Fecha de Revision</label>
                 <input type="date" name="dateRevision" id="dateRevision" placeholder="Fecha de revision"
-                    autocomplete="off" formControlName="dateRevision" />
+                    autocomplete="off" formControlName="dateRevision" readonly />
                 <app-show-form-error *ngIf="isValidField('dateRevision')" [message]="getFieldError('dateRevision')" />
             </div>
         </div>

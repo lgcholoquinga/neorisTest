@@ -12,6 +12,7 @@ import { Product } from '@core/models/product.interface';
 })
 export class PoductsTableComponent {
   @Input({ required: true }) products: Product[] = [];
+  @Input({ required: true }) totalProducts = 0;
   @Output() onShowProductsChange = new EventEmitter<number>();
 
   /**

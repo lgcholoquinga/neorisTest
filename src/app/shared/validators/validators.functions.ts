@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, ValidationErrors } from '@angular/forms';
 
 /**
  * Metodo que permite validar que la fecha ingresada mediante un formulario
@@ -7,8 +7,10 @@ import { FormControl } from '@angular/forms';
  * @param control Formulario de control
  * @returns Objeto en el caso que exista un error o un valor null
  */
-export const fechaMayorIgualHoyValidator = (control: FormControl) => {
-  if (control.value === null) return;
+export const fechaMayorIgualHoyValidator = (
+  control: FormControl
+): ValidationErrors | null => {
+  if (control.value === null) return null;
   let date = new Date(control.value);
   date.setDate(date.getDate() + 1);
   const currentDate = new Date();
