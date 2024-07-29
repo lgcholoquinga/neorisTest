@@ -23,7 +23,8 @@ export default class EditProductComponent {
    * @returns Object con the new product updated
    */
   onUpdateProduct(product: Product) {
-    this.productService.updateProduct(product).subscribe(() => {
+    this.productService.updateProduct(product).subscribe((data) => {
+      console.log(data);
       alert('Product updated succesfully.');
       this.navigate.navigateByUrl('/products');
     });

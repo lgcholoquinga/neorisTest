@@ -21,7 +21,6 @@ export default class CreateProductComponent {
    * @returns Object con the new product registered
    */
   onSaveProduct(product: Product) {
-    console.log(product);
     this.productService.createProduct(product).subscribe(() => {
       alert('Product registered succesfully.');
       this.navigate.navigateByUrl('/products');

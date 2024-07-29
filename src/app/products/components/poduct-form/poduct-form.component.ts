@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import {
   Component,
@@ -60,6 +61,8 @@ export class PoductFormComponent implements OnInit {
     dateRevision: ['', [Validators.required]],
   });
 
+  public fomatDateLocal = 'YYYY-MM-DD';
+
   ngOnInit(): void {
     if (this.isEdition) {
       this.loadDataEditProduct();
@@ -81,28 +84,26 @@ export class PoductFormComponent implements OnInit {
     this.productForm.controls['name'].setValue(editProduct.name);
     this.productForm.controls['description'].setValue(editProduct.description);
     this.productForm.controls['logo'].setValue(editProduct.logo);
+
     this.productForm.controls['dateRelease'].setValue(
-      this.convertDateToString(editProduct.date_release)
+      this.getDateFormat(editProduct.date_release)
     );
+
     this.productForm.controls['dateRevision'].setValue(
-      this.convertDateToString(editProduct.date_revision)
+      this.getDateFormat(editProduct.date_revision)
     );
   }
 
   /**
-   * Method that reorder date string to correct format
-   * @param dateStr Date in format string
-   * @returns Date with correct format
+   * Format date for form
+   *
+   * @param date Date in string format
+   * @returns String date in correct format
    */
-  public convertDateToString(dateStr: string) {
-    const dateString = new Date(dateStr).toLocaleDateString('en-ES', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    const splitDate = dateString.split('/');
-    return `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`;
+  public getDateFormat(date: string) {
+    const dateRelease = moment(date, moment.ISO_8601);
+    const dateUTC = dateRelease.utc();
+    return dateUTC.format(this.fomatDateLocal);
   }
 
   /**
@@ -134,6 +135,10 @@ export class PoductFormComponent implements OnInit {
    */
   onResetForm() {
     this.productForm.reset();
+    if (this.isEdition) {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.productForm.controls['id'].setValue(id);
+    }
   }
 
   /**
@@ -159,23 +164,10 @@ export class PoductFormComponent implements OnInit {
    */
   onChangeDateRelease() {
     const dateRelease = this.productForm.controls['dateRelease'].value;
-    let date = new Date(dateRelease);
-    date.setDate(date.getDate() + 2);
+    const date = moment(dateRelease);
+    const nextYear = date.add(1, 'year');
     this.productForm.controls['dateRevision'].setValue(
-      this.convertDateFormat(date.toLocaleDateString())
+      nextYear.format(this.fomatDateLocal)
     );
-  }
-
-  /**
-   * Method that permit format a date
-   * @param dateString Value in string
-   * @returns Format date YYYY/MM/DD
-   */
-  convertDateFormat(dateString: string) {
-    const parts = dateString.split('/');
-    const year = parts[2];
-    const month = parts[1].padStart(2, '0');
-    const day = parts[0].padStart(2, '0');
-    return `${year}-${month}-${day}`;
   }
 }

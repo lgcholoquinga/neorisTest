@@ -64,6 +64,6 @@ export class ProductsService {
    * @returns Object with new data product
    */
   updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(this.productsUrl, { product });
+    return this.http.put<Product>(this.productsUrl, product);
   }
 }

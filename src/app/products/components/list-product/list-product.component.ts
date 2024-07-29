@@ -44,10 +44,18 @@ export default class ListProductComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Method that emit value  of the input search
+   * @param value Value of the input search
+   */
   onKeyPress(value: string) {
     this.debouncer.next(value);
   }
 
+  /**
+   * Method that permit get products by quantity
+   * @param quantity Values [5-10-20]
+   */
   onGetProductsByQuantity(quantity: number) {
     this.currentQuantity = quantity;
     this.selectedProducts = this.products.slice(0, quantity);
