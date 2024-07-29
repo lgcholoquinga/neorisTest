@@ -3,12 +3,14 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
   ViewChild,
   inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '@core/models/product.interface';
 import { ProductsService } from '@core/services/products.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dropdown',
@@ -17,7 +19,7 @@ import { ProductsService } from '@core/services/products.service';
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
 })
-export class DropdownComponent {
+export class DropdownComponent implements OnDestroy {
   private router = inject(Router);
   private productsService = inject(ProductsService);
 
@@ -25,6 +27,8 @@ export class DropdownComponent {
 
   @ViewChild('modalConfirm')
   modalConfirmDeleteProduct!: ElementRef<HTMLDivElement>;
+
+  public subscription$?: Subscription;
 
   /**
    * Method that redirect to edit product page
@@ -48,14 +52,16 @@ export class DropdownComponent {
    */
   onRemoveProduct(): void {
     this.onCloseModal();
-    this.productsService.deleteProduct(this.product?.id).subscribe((data) => {
-      if (data.deletedProduct) {
-        alert('Product deleted.');
-        window.location.reload();
-      } else {
-        alert('Error when deleting the product');
-      }
-    });
+    this.subscription$ = this.productsService
+      .deleteProduct(this.product?.id)
+      .subscribe((data) => {
+        if (data.deletedProduct) {
+          alert('Product deleted.');
+          window.location.reload();
+        } else {
+          alert('Error when deleting the product');
+        }
+      });
   }
 
   /**
@@ -73,5 +79,9 @@ export class DropdownComponent {
    */
   onCloseModal(): void {
     this.modalConfirmDeleteProduct.nativeElement.style.display = 'none';
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$?.unsubscribe();
   }
 }

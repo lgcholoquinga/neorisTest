@@ -22,14 +22,17 @@ export default class ListProductComponent implements OnInit, OnDestroy {
 
   public debouncer: Subject<string> = new Subject<string>();
   public debouncerSubs$?: Subscription;
+  public subscription$?: Subscription;
 
   public currentQuantity = 5;
 
   ngOnInit(): void {
-    this.productsService.getAllProducts().subscribe((data) => {
-      this.products = data;
-      this.onGetProductsByQuantity(this.initialQuantity);
-    });
+    this.subscription$ = this.productsService
+      .getAllProducts()
+      .subscribe((data) => {
+        this.products = data;
+        this.onGetProductsByQuantity(this.initialQuantity);
+      });
 
     this.debouncerSubs$ = this.debouncer
       .pipe(debounceTime(300))
@@ -63,5 +66,6 @@ export default class ListProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.debouncerSubs$?.unsubscribe();
+    this.subscription$?.unsubscribe();
   }
 }
